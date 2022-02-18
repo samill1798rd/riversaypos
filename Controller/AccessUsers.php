@@ -1,5 +1,6 @@
 <?PHP
 require('../Model/Conexion.php');
+require('Constans.php');
 
 if(!isset($_SESSION)){
     session_start();
@@ -31,6 +32,7 @@ if(empty($searchUser)){
 }
 
 else if($tipo == 'ADMINISTRADOR'){
+    $urlViews = URL_VIEWS;
     require('../Views/Wellcome.php');
 }
 
