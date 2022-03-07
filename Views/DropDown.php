@@ -8,6 +8,7 @@
                 <span class="username"><?php echo $userLogueado;?></span>
                 <b class="caret"></b>
             </a>
+            <?php include("MenuOpciones.php"); ?>
         </li>
     </ul>
 
