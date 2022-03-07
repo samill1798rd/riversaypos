@@ -32,7 +32,11 @@ if(empty($searchUser)){
 }
 
 else if($tipo == 'ADMINISTRADOR'){
+
     $urlViews = URL_VIEWS;
+    $userLogueado = $nombre;
+    $imageUser = $foto;
+
     require('../Views/Wellcome.php');
 }
 
