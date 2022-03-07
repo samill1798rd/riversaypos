@@ -23,6 +23,8 @@
             </div>
             <?php include("DropDown.php"); ?>
         </header>
+
+        <?php include("Menu.php"); ?>
     </section>
 
 <?php include("LibraryJs.php"); ?>

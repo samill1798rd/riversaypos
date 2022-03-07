@@ -36,6 +36,7 @@ else if($tipo == 'ADMINISTRADOR'){
     $urlViews = URL_VIEWS;
     $userLogueado = $nombre;
     $imageUser = $foto;
+    $menuMain = $con->getMenuMain();
 
     require('../Views/Wellcome.php');
 }
