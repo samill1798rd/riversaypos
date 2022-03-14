@@ -49,6 +49,29 @@ class Conexion{
 
         return $retorno;
     }
+
+    public function getMenuMainVentas(){
+
+        $query = $this->con->query("SELECT * FROM menu WHERE acceso = 'A'");
+
+        $retorno = [];
+
+        $i = 0;
+
+        while ($fila = $query->fetch_assoc()){
+            $retorno[$i] = $fila;
+            $i++;
+        }
+
+        return $retorno;
+    }
+
+    public function getAllUserData(){
+
+        $query = $this->con->query("SELECT * FROM usuarios");
+
+        return $query;
+    }
 }
 
 ?>

@@ -42,6 +42,12 @@ else if($tipo == 'ADMINISTRADOR'){
 }
 
 else if($tipo == 'VENTAS'){
+
+    $urlViews = URL_VIEWS;
+    $userLogueado = $nombre;
+    $imageUser = $foto;
+    $menuMain = $con->getMenuMainVentas();
+
     require('../Views/WellcomeVentas.php');
 }
 

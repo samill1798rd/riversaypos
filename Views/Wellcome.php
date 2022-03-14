@@ -70,7 +70,7 @@
                     <i class="fa fa-money"></i>
                     <div class="count"><?PHP
                         //echo $gastototales;
-                        ?>$us.
+                        ?>$RD.
                     </div>
                     <div class="title">Gastos y Entradas</div>
                 </div><!--/.info-box-->
