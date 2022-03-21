@@ -72,6 +72,35 @@ class Conexion{
 
         return $query;
     }
+
+    public function getRegisterNewUser($nombre,$tipo,$usuario,$password,$imagenUsuario){
+
+        $query = $this->con->query("INSERT INTO usuarios (`login`,`tipo`,`nombre`,`passwordC`,`foto`) 
+        VALUES('$usuario','$tipo','$nombre','$password','$imagenUsuario')");
+        
+        return $query;
+    }
+    
+    public function deleteUsuario($idUsuario){
+
+        $query = $this->con->query("DELETE FROM usuarios WHERE id_usuario = '$idUsuario'");
+
+        return $query;
+    }
+
+    public function updateUsuario($login, $tipo, $nombre, $password, $foto, $idUsuario)
+    {
+        
+        $query = $this->con->query("UPDATE `usuarios` 
+                                          SET `login` = '$login', 
+                                               `tipo` = '$tipo', 
+                                                `nombre` = '$nombre',
+                                                 `passwordC` = '$password', 
+                                                 `foto` = '$foto' WHERE `usuarios`.`id_usuario` = $idUsuario");
+
+        return $query;
+    }
+
 }
 
 ?>

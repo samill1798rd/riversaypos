@@ -178,7 +178,91 @@
                                             </td>
                                         </tr>
 
-                                    
+                                        <div id="a<?php echo $datosUsuarios[0]; ?>" class="modal fade" tabindex="-1"
+                                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <form class="form-validate form-horizontal" name="form2"
+                                                  action="Registros.php" method="post" enctype="multipart/form-data">
+                                                <input name="usuarioLogin" value="<?php echo $usuario; ?>"
+                                                       type="hidden">
+                                                <input name="passwordLogin" value="<?php echo $password; ?>"
+                                                       type="hidden">
+                                                <input type="hidden" name="idUsuario"
+                                                       value="<?php echo $datosUsuarios['id_usuario']; ?>">
+                                                <input type="hidden" name="imagen"
+                                                       value="<?php echo $datosUsuarios['foto']; ?>">
+
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-hidden="true">×
+                                                            </button>
+                                                            <h3 id="myModalLabel" align="center">Cambiar Informacion del Usuario</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="<?PHP echo $urlViews;
+                                                            echo $datosUsuarios['foto']; ?>" width="250" height="250">
+                                                            <br><br>
+                                                            <section class="panel" class="col-lg-6">
+                                                                <div><strong>Cambiar Imagen de usuario</strong></div>
+                                                                <?php include("UploadViewImageEdit.php"); ?>
+                                                            </section>
+                                                        
+                                                            <div class="form-group ">
+                                                                <label for="proveedor"
+                                                                       class="control-label col-lg-2">Nombre:</label>
+                                                                <div class="col-lg-10">
+                                                                    <input class="form-control input-lg m-bot15"
+                                                                           type="text" name="nombre"
+                                                                           value="<?php echo $datosUsuarios['nombre']; ?>">
+                                                                    <input type="hidden" name="idUsuario"
+                                                                           value="<?php echo $datosUsuarios['id_usuario']; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                <label for="responsable"
+                                                                       class="control-label col-lg-2">Tipo:</label>
+                                                                <div class="col-lg-10">
+                                                                    <select class="form-control input-lg m-bot15"
+                                                                            name="tipo">
+                                                                        <option value="<?php echo $datosUsuarios['tipo']; ?>"><?php echo $datosUsuarios['tipo']; ?></option>
+                                                                        <option value="ADMINISTRADOR">
+                                                                            ADMINISTRADOR
+                                                                        </option>
+                                                                        <option value="VENTAS">VENTAS</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                <label for="direccion"
+                                                                       class="control-label col-lg-2">Login:</label>
+                                                                <div class="col-lg-10">
+                                                                    <input class="form-control input-lg m-bot15"
+                                                                           type="text" name="login"
+                                                                           value="<?php echo $datosUsuarios['login']; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                <label for="telefono"
+                                                                       class="control-label col-lg-2">Password:</label>
+                                                                <div class="col-lg-10">
+                                                                    <input class="form-control input-lg m-bot15"
+                                                                           type="text" name="password"
+                                                                           value="<?php echo $datosUsuarios['passwordC']; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true"><strong>Cerrar</strong>
+                                                                </button>
+                                                                <button name="update_usuario" type="submit"
+                                                                        class="btn btn-danger"><strong>Actualizar  Datos</strong></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
 
                                     <?PHP } ?>
                                 </table>

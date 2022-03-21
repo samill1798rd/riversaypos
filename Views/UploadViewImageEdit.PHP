@@ -1,7 +1,7 @@
 
-<input id="files" type="file" name="userfile"/>
-<output id="list-miniatura"></output>
-<output id="list-datos"></output>
+<input id="files" type="file" name="userfileEdit"/>
+<output id="list-miniaturaEdit"></output>
+<output id="list-datosEdit"></output>
 
 
 <script>
@@ -21,14 +21,14 @@
                     // Render thumbnail.
                     var span = document.createElement('span');
                     span.innerHTML = ['Nombre: ', escape(theFile.name), ' || Tamanio: ', escape(theFile.size), ' bytes || type: ', escape(theFile.type), '<br /><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"style="width:100%;"/><br />'].join('');
-                    document.getElementById('list-miniatura').insertBefore(span, null);
+                    document.getElementById('list-miniaturaEdit').insertBefore(span, null);
                 };
             })(f);
 
             // Read in the image file as a data URL.
             reader.readAsDataURL(f);
         }
-        document.getElementById('list-datos').innerHTML = '<ul>' + output.join('') + '</ul>';
+        document.getElementById('list-datosEdit').innerHTML = '<ul>' + output.join('') + '</ul>';
     }
 
     function handleDragOver(evt) {
@@ -62,8 +62,8 @@
                 return function (e) {
                     // Render thumbnail.
                     var span = document.createElement('span');
-                    span.innerHTML = ['<br /><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '" style="width:50%;"/><br />'].join('');
-                    document.getElementById('list-miniatura').insertBefore(span, null);
+                    span.innerHTML = ['<br /><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '" style="width:100%;"/><br />'].join('');
+                    document.getElementById('list-miniaturaEdit').insertBefore(span, null);
                 };
             })(f);
 
