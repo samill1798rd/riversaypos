@@ -20,6 +20,12 @@ if(isset($_POST['nuevo_usuario'])){
     $tipo = $_POST['tipo'];
     $password = $_POST['password'];
 
+    $mensaje = "Se agrego un nuevo usuario.";
+    $alerta = "alert alert-success";
+
+    $updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
+
+
     if ($_FILES['userfile']['name'] != "") {
 
         $ruta = "fotoproducto/";
@@ -60,6 +66,12 @@ if(isset($_GET['idborrar'])){
     $usuarioLogin = $_GET['usuarioLogin'];
     $passwordLogin = $_GET['passwordLogin'];
 
+    $mensaje = "Se elimino el usuario.";
+    $alerta = "alert alert-danger";
+
+    $updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
+
+
     $deleteUser = $con->deleteUsuario($idUsuario);
 }
 
@@ -79,7 +91,7 @@ if (isset($_POST['update_usuario'])) {
     $mensaje = "Se Edito los datos de  un usuario";
     $alerta = "alert alert-info";
 
-    //$updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
+    $updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
 
 
     if ($_FILES['userfileEdit']['name'] != "") {

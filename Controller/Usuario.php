@@ -23,6 +23,21 @@ foreach($searchUser as $user){
     $foto = $user['foto'];
 }
 
+$tipoDeAlerta = $con->getMensajeAlerta();
+
+foreach($tipoDeAlerta as $tipoAlerta){
+    $alerta = $tipoAlerta['tipoAlerta'];
+    $mensaje = $tipoAlerta['mensaje'];
+}
+
+if(!isset($_GET['estado'])){
+
+    $mensaje = "";
+    $alerta = "";
+    
+    $updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
+}
+
 $userLogueado = $nombre;
 $imageUser = $foto;
 $urlViews = URL_VIEWS;

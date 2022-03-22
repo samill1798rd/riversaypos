@@ -35,6 +35,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header"><i class="fa fa-laptop"></i> PRINCIPAL</h3>
+                    <div class="<?PHP echo $alerta; ?>" role="alert">
+                        <strong><?php echo $mensaje; ?></strong>
+                    </div>
+
+                    <!-- $alerta = tipoAlerta['tipoAlerta'];
+                    $mensaje = tipoAlerta['mensaje']; -->
+
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="principal.php">Inicio</a></li>
                     <li><i class="fa fa-laptop"></i> Usuarios</li>

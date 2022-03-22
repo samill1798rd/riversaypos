@@ -101,6 +101,32 @@ class Conexion{
         return $query;
     }
 
+    public function getMensajeAlerta(){
+
+        $query = $this->con->query("SELECT * FROM ALERTA");
+
+        $retorno = [];
+
+        $i = 0;
+
+        while ($fila = $query->fetch_assoc()){
+            $retorno[$i] = $fila;
+            $i++;
+        }
+
+        return $retorno;
+    }
+
+    public function updateMensajeAlert($mensaje, $alerta)
+    {
+        $query = $this->con->query("UPDATE `alerta` SET `tipoAlerta` = '$alerta',
+                                                `mensaje` = '$mensaje'  WHERE `alerta`.`alertaId` = 1");
+        return $query;
+    }
+
+
+    
+
 }
 
 ?>
