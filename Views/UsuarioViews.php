@@ -43,8 +43,7 @@
                     $mensaje = tipoAlerta['mensaje']; -->
 
                 <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="principal.php">Inicio</a></li>
-                    <li><i class="fa fa-laptop"></i> Usuarios</li>
+                    <?php include("MenuOpcionesConfiguracion.php"); ?>   
                 </ol>
             </div>
         </div>

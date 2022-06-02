@@ -124,6 +124,13 @@ class Conexion{
         return $query;
     }
 
+    public function getDatosFactura()
+    {
+        $query = $this->con->query("SELECT * FROM datos");
+
+        return $query;
+    }
+
 
     
 
