@@ -14,11 +14,11 @@ $searchUser = $con->getUser($usuario,$password);
 
 
 foreach($searchUser as $user){
-    $idUsuario = $user['id_usuario'];
+    $idUsuario = $user['id_usu'];
     $tipo = $user['tipo'];
     $login = $user['login'];
     $nombre = $user['nombre'];
-    $password = $user['passwordC'];
+    $password = $user['password'];
     $foto = $user['foto'];
 }
 

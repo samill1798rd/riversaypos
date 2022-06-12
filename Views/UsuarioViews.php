@@ -174,7 +174,7 @@
                                             <td> <?PHP echo $datosUsuarios['nombre']; ?></td>
                                             <td> <?PHP echo $datosUsuarios['tipo']; ?></td>
                                             <td> <?PHP echo $datosUsuarios['login']; ?></td>
-                                            <td> <?PHP echo $datosUsuarios['passwordC']; ?></td>
+                                            <td> <?PHP echo $datosUsuarios['password']; ?></td>
                                             <td>
                                                 <a href="#a<?php echo $datosUsuarios[0]; ?>" role="button" class="btn btn-success" data-toggle="modal">
                                                     <i class="icon_check_alt2"></i> </a>
@@ -193,7 +193,7 @@
                                                 <input name="passwordLogin" value="<?php echo $password; ?>"
                                                        type="hidden">
                                                 <input type="hidden" name="idUsuario"
-                                                       value="<?php echo $datosUsuarios['id_usuario']; ?>">
+                                                       value="<?php echo $datosUsuarios['id_usu']; ?>">
                                                 <input type="hidden" name="imagen"
                                                        value="<?php echo $datosUsuarios['foto']; ?>">
 
@@ -222,7 +222,7 @@
                                                                            type="text" name="nombre"
                                                                            value="<?php echo $datosUsuarios['nombre']; ?>">
                                                                     <input type="hidden" name="idUsuario"
-                                                                           value="<?php echo $datosUsuarios['id_usuario']; ?>">
+                                                                           value="<?php echo $datosUsuarios['id_usu']; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group ">
@@ -254,7 +254,7 @@
                                                                 <div class="col-lg-10">
                                                                     <input class="form-control input-lg m-bot15"
                                                                            type="text" name="password"
-                                                                           value="<?php echo $datosUsuarios['passwordC']; ?>">
+                                                                           value="<?php echo $datosUsuarios['password']; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

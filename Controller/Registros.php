@@ -76,7 +76,7 @@ if(isset($_GET['idborrar'])){
 }
 
 if (isset($_POST['update_usuario'])) {
-
+   
     $idUsuarioData = $_POST['idUsuario'];
     $login = $_POST['login'];
     $tipo = $_POST['tipo'];
@@ -88,7 +88,7 @@ if (isset($_POST['update_usuario'])) {
     $passwordLogin = $_POST['passwordLogin'];
 
 
-    $mensaje = "Se Edito los datos de  un usuario";
+    $mensaje = "Se Editaron los datos del usuario";
     $alerta = "alert alert-info";
 
     $updateMensaje = $con->updateMensajeAlert($mensaje, $alerta);
@@ -124,6 +124,9 @@ if (isset($_POST['update_usuario'])) {
 
 
     $updateUser = $con->updateUsuario($login, $tipo, $nombre, $password, $imagenUsuario, $idUsuarioData);
+
+    // var_dump($);
+    // exit();
 
 }
 

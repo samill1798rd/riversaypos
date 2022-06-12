@@ -12,15 +12,15 @@ class Conexion{
 
     public function __construct(){
         $user = 'root';
-        $password = 'Carlos1798';
-        $server = 'localhost:3306';
+        $password = '';
+        $server = 'localhost';
         $database = 'riversaypos';
         $this->con = new mysqli($server,$user,$password,$database);
     }
 
     public function getUser($usuario, $password){
 
-        $query = $this->con->query("SELECT * FROM usuarios WHERE login='" . $usuario . "'AND passwordC='" . $password . "'");
+        $query = $this->con->query("SELECT * FROM usuarios WHERE login='" . $usuario . "'AND password='" . $password . "'");
 
         $retorno = [];
 
@@ -75,7 +75,7 @@ class Conexion{
 
     public function getRegisterNewUser($nombre,$tipo,$usuario,$password,$imagenUsuario){
 
-        $query = $this->con->query("INSERT INTO usuarios (`login`,`tipo`,`nombre`,`passwordC`,`foto`) 
+        $query = $this->con->query("INSERT INTO usuarios (`login`,`tipo`,`nombre`,`password`,`foto`) 
         VALUES('$usuario','$tipo','$nombre','$password','$imagenUsuario')");
         
         return $query;
@@ -83,23 +83,39 @@ class Conexion{
     
     public function deleteUsuario($idUsuario){
 
-        $query = $this->con->query("DELETE FROM usuarios WHERE id_usuario = '$idUsuario'");
+        $query = $this->con->query("DELETE FROM usuarios WHERE id_usu = '$idUsuario'");
 
         return $query;
     }
 
+    // public function updateUsuario($login, $tipo, $nombre, $password, $foto, $idUsuario)
+    // {
+        
+    //     $query = $this->con->query("UPDATE `usuarios` 
+    //                                       SET `login` = '$login', 
+    //                                            `tipo` = '$tipo', 
+    //                                             `nombre` = '$nombre',
+    //                                              `password` = '$password', 
+    //                                              `foto` = '$foto' WHERE `usuarios`.`id_usu` = $idUsuario");
+
+    //     return $query;
+    // }
+
+
+    
     public function updateUsuario($login, $tipo, $nombre, $password, $foto, $idUsuario)
     {
-        
+
         $query = $this->con->query("UPDATE `usuarios` 
                                           SET `login` = '$login', 
                                                `tipo` = '$tipo', 
                                                 `nombre` = '$nombre',
-                                                 `passwordC` = '$password', 
-                                                 `foto` = '$foto' WHERE `usuarios`.`id_usuario` = $idUsuario");
+                                                 `password` = '$password', 
+                                                 `foto` = '$foto' WHERE `usuarios`.`id_usu` = $idUsuario");
 
         return $query;
     }
+
 
     public function getMensajeAlerta(){
 
@@ -130,6 +146,20 @@ class Conexion{
 
         return $query;
     }
+
+    public function updateDataFactura($propietario, $razon, $direccion, $nro, $telefono, $iddatos)
+    {
+        $query = $this->con->query("UPDATE `datos` SET `propietario` = '$propietario', 
+                                                       `razon` = '$razon',
+                                                       `direccion` = '$direccion',
+                                                       `nro` = '$nro', 
+                                                       `telefono` = '$telefono' 
+                                                        WHERE `datos`.`iddatos` = $iddatos");
+
+        return $query;
+
+    }
+
 
 
     
