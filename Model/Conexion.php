@@ -173,13 +173,30 @@ class Conexion{
         $query = $this->con->query("UPDATE `moneda` SET `pais` = '$pais', 
                                                         `tipoMoneda` = '$tipoMoneda', 
                                                         `contexto` = '$contexto' 
-                                                        WHERE `moneda`.`idMoneda` = $idMoneda;
-
-        ");
+                                                        WHERE `moneda`.`idMoneda` = $idMoneda");
 
         return $query;
-
     }
+
+    public function getIdioma()
+    {
+        $query = $this->con->query("SELECT * FROM `idioma`");
+
+        return $query;
+    }
+
+    public function updateDataIdioma($pais, $idioma, $idIdioma)
+    {
+        $query = $this->con->query(" UPDATE `idioma` SET `pais` = '$pais',
+                                                         `idioma` = '$idioma' 
+                                                         WHERE `idioma`.`idIdioma` = $idIdioma");
+
+        return $query;
+    }
+
+
+
+   
 
    
 
