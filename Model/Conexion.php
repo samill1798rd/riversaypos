@@ -160,7 +160,28 @@ class Conexion{
 
     }
 
+    public function getMoneda()
+    {
+        $query = $this->con->query("SELECT * FROM moneda");
 
+        return $query;
+    }
+
+
+    public function updateDataMoneda($pais, $tipoMoneda, $contexto, $idMoneda)
+    {
+        $query = $this->con->query("UPDATE `moneda` SET `pais` = '$pais', 
+                                                        `tipoMoneda` = '$tipoMoneda', 
+                                                        `contexto` = '$contexto' 
+                                                        WHERE `moneda`.`idMoneda` = $idMoneda;
+
+        ");
+
+        return $query;
+
+    }
+
+   
 
     
 
