@@ -255,6 +255,121 @@ class Conexion{
         return $query;
     }
 
+    public function getAllProducto()
+    {
+
+        $query = $this->con->query("SELECT * FROM producto");
+
+        return $query;
+    }
+
+    public function getTipoMoneda()
+    {
+
+        $query = $this->con->query("SELECT * FROM `moneda`");
+
+        $retorno = [];
+
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+
+    }
+
+
+    public function getProductoElegido($idproducto)
+    {
+
+        $query = $this->con->query("SELECT * FROM `producto` where idproducto='$idproducto'");
+
+        $retorno = [];
+
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+
+    }
+
+
+    public function insertarPreventaProducto($imagen, $producto, $precio, $idProducto, $pventa, $idUser, $tipo)
+    {
+        $query = $this->con->query("INSERT INTO `preventa` (`idPreventa`, `imagen`, `producto`, `precio`, `idProducto`, `pventa`, `idUser`, `tipo`)
+                                          VALUES (NULL, '$imagen', '$producto', '$precio', '$idProducto', '$pventa', '$idUser', '$tipo')");
+
+        return $query;
+    }
+
+
+    public function getAllTipoProducto()
+    {
+        $query = $this->con->query("SELECT * FROM tipoproducto");
+
+        return $query;
+    }
+
+
+    public function registerNewProducto($imagen, $codigo, $nombreProducto, $cantidad, $fechaRegistro, $precioVenta, $tipo, $proveedor, $precioCompra)
+    {
+        $query = $this->con->query("INSERT INTO `producto` (`idproducto`, `imagen`, `codigo`, `nombreProducto`, `cantidad`, `fechaRegistro`, `precioVenta`, `tipo`, `proveedor`, `precioCompra`) 
+                                          VALUES (NULL, '$imagen', '$codigo', '$nombreProducto', '$cantidad', '$fechaRegistro', '$precioVenta', '$tipo', '$proveedor', '$precioCompra')");
+
+        return $query;
+    }
+
+    public function deleteProduct($idproducto)
+    {
+        $query = $this->con->query("Delete from producto where idproducto=$idproducto");
+
+        return $query;
+    }
+
+    public function updateProduct($imagen, $codigo, $nombreProducto, $cantidad, $fechaRegistro, $precioVenta, $tipo, $proveedor, $precioCompra, $idproducto)
+    {
+  
+        $query = $this->con->query("UPDATE `producto` SET `imagen` = '$imagen', 
+                                                     `codigo` = '$codigo',
+                                                     `nombreProducto` = '$nombreProducto',
+                                                     `cantidad` = '$cantidad', 
+                                                     `fechaRegistro` = '$fechaRegistro', 
+                                                     `precioVenta` = '$precioVenta', 
+                                                     `tipo` = '$tipo',
+                                                      `proveedor` = '$proveedor', 
+                                                      `precioCompra` = '$precioCompra' WHERE `producto`.`idproducto` = $idproducto");
+
+        return $query;
+    }
+
+    public function registerNewTipoProduct($tipoProducto)
+    {
+        $query = $this->con->query("INSERT INTO `tipoproducto` (`idtipoproducto`, `tipoproducto`) 
+                                          VALUES (NULL, '$tipoProducto')");
+
+        return $query;
+
+    }
+
+    public function deleteTipoProduct($tipoProductoId)
+    {
+        $query = $this->con->query("Delete from tipoproducto where idtipoproducto=$tipoProductoId");
+
+        return $query;
+    }
+
+    public function updateTipoProducto($tipoProductoId, $tipoproducto)
+    {
+        $query = $this->con->query("UPDATE `tipoproducto` SET `tipoproducto` = '$tipoproducto'
+                                          WHERE `tipoproducto`.`idtipoproducto` = $tipoProductoId");
+
+        return $query;
+    }
+
+
 
    
 
