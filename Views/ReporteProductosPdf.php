@@ -118,7 +118,7 @@ class PDF extends FPDF
 }
 
 $pdf = new PDF('L', 'mm', 'Letter');
-$pdf->Open();
+// $pdf->Open();
 $pdf->AddPage();
 $pdf->SetMargins(20, 20, 20);
 $pdf->Ln(10);
