@@ -369,6 +369,43 @@ class Conexion{
         return $query;
     }
 
+    //Activo / Inventario Mantenimiento
+    public function getAllActivos()
+    {
+        $query = $this->con->query("SELECT * FROM activos ");
+
+        return $query;
+    }
+
+    public function registerNewActivo($imagen, $codigo, $nombreProducto, $cantidad, $fechaRegistro)
+    {
+
+        $query = $this->con->query("INSERT INTO `activos` (`idactivo`, `imagen`, `codigo`, `nombreProducto`, `cantidad`, `fechaRegistro`) 
+                                          VALUES (NULL, '$imagen', '$codigo', '$nombreProducto', '$cantidad', '$fechaRegistro')");
+
+        return $query;
+    }
+
+    public function deleteActivo($idproducto)
+    {
+        $query = $this->con->query("Delete from activos where idactivo=$idproducto");
+
+        return $query;
+    }
+
+    public function updateActivo($imagen, $codigo, $nombreProducto, $cantidad, $fechaRegistro, $idproducto)
+    {
+
+        $query = $this->con->query("UPDATE `activos` SET `imagen` = '$imagen', 
+                                                     `codigo` = '$codigo',
+                                                     `nombreProducto` = '$nombreProducto',
+                                                     `cantidad` = '$cantidad', 
+                                                     `fechaRegistro` = '$fechaRegistro' 
+                                                      WHERE `activos`.`idactivo` = $idproducto");
+
+        return $query;
+    }
+
 
 
    
