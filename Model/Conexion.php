@@ -369,7 +369,7 @@ class Conexion{
         return $query;
     }
 
-    //Activo / Inventario Mantenimiento
+    //Activo
     public function getAllActivos()
     {
         $query = $this->con->query("SELECT * FROM activos ");
@@ -406,13 +406,51 @@ class Conexion{
         return $query;
     }
 
-
-
-   
-
-   
+    public function getPreventa()
+    {
+        $query = $this->con->query("SELECT idPreventa,imagen,producto,COUNT(producto) as cantidad, SUM(precio) as totalPrecio,idProducto,pventa,idUser,precio,tipo 
+                                            FROM `preventa` 
+                                            GROUP BY producto,idProducto,tipo 
+                                            ORDER BY idPreventa ASC");
+        return $query;
+    }
 
     
+    public function getTotalPreventa()
+    {
+        $query = $this->con->query("SELECT Sum(precio) as total , idUser FROM `preventa`");
+        return $query;
+    }
+
+    public function getOnlyUserData($idUser)
+    {
+
+        $query = $this->con->query("SELECT * FROM usuarios where id_usu=$idUser");
+        $retorno = [];
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+    }
+
+    
+    public function deleteOnlyPreventa($idProducto, $tipo)
+    {
+        $query = $this->con->query("Delete from preventa where idproducto='$idProducto'  and  tipo='$tipo'");
+        return $query;
+    }
+
+    
+    public function deleteAllPreventa()
+    {
+        $query = $this->con->query("TRUNCATE `preventa`");
+        return $query;
+    }
+
+
+
 
 }
 
