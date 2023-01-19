@@ -449,6 +449,38 @@ class Conexion{
         return $query;
     }
 
+    public function getDataProductoChoose($idProducto, $tipo)
+    {
+
+        $query = $this->con->query("SELECT * FROM `preventa` where idproducto='$idProducto' and tipo='$tipo'");
+
+        $retorno = [];
+
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+
+    }
+
+
+    public function getCantidadProductoChoose($idProducto, $tipo)
+    {
+        $query = $this->con->query("SELECT count(idproducto) as cantidadTotal FROM `preventa` where idproducto='$idProducto' and tipo='$tipo'");
+
+        $retorno = [];
+
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+
+    }
+
 
 
 
