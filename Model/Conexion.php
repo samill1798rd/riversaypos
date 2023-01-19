@@ -481,6 +481,64 @@ class Conexion{
 
     }
 
+    public function getContact($nitClient)
+    {
+        $query = $this->con->query("SELECT * FROM `cliente`  where  ci='$nitClient'");
+        return $query;
+    }
+
+    
+    public function getClienteDatos($nitClient)
+    {
+        $query = $this->con->query("select * from cliente where ci = $nitClient ");
+        $retorno = [];
+
+        $i = 0;
+        while ($fila = $query->fetch_assoc()) {
+            $retorno[$i] = $fila;
+            $i++;
+        }
+        return $retorno;
+    }
+
+    
+    public function registrarDatosPreventa($ci, $nombre, $totalAPagar, $efectivo, $cambio, $fechaVenta, $idcliente)
+    {
+        $query = $this->con->query("INSERT INTO `clientedato` (`idCliente`, `nombre`, `ci`, `fecha`, `totalApagar`, `efectivo`, `cambio`, `idClientei`, `tipoVenta`) 
+                                            VALUES (NULL , '$nombre', '$ci', '$fechaVenta', '$totalAPagar', '$efectivo', '$cambio', '$idcliente', 'Local');");
+        return $query;
+    }
+
+
+    
+    public function getDataCliente()
+    {
+        $query = $this->con->query("SELECT * FROM `clientedato` order by idcliente DESC  limit 1");
+        return $query;
+    }
+
+    public function getDatosDosificacion()
+    {
+        $query = $this->con->query("SELECT * FROM `dosificacion`");
+        return $query;
+    }
+    
+    public function getPedidoTotalForFactura()
+    {
+        $query = $this->con->query("SELECT idpreventa,imagen,producto,precio, count( idproducto ) AS cantidad, precio*count( idproducto ) as totalPrecio, idproducto, pventa ,tipo FROM `preventa`  GROUP BY idproducto");
+        return $query;
+    }
+
+    
+    public function getNumFicha($dateInicial, $dateFinal)
+    {
+        $query = $this->con->query("SELECT (COUNT(*) +1 ) as numficha FROM `ventatotal` WHERE fecha >= '$dateInicial 00:00:00' and fecha <= '$dateFinal 23:59:00'");
+        return $query;
+    }
+
+
+
+
 
 
 
