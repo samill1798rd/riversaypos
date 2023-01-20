@@ -131,7 +131,7 @@ include('LiteralMoney.php');
                                 <td colspan="6"><span style="color: #2b2b2b;"><b>Fecha de Venta : </b> <?PHP echo $fecha; ?></span></td>
                             </tr>
                             <tr>
-                                <td colspan="6"><span style="color: #2b2b2b;"><b>Nit/CI : </b> <?PHP echo $ci; ?></span></td>
+                                <td colspan="6"><span style="color: #2b2b2b;"><b>Identificacion : </b> <?PHP echo $ci; ?></span></td>
                             </tr>
                             <tr>
                                 <td colspan="6"><span style="color: #2b2b2b;"><b>Se&ntilde;or(es): </b> <?PHP echo $nombreCliente; ?></span></td>
@@ -189,7 +189,8 @@ include('LiteralMoney.php');
                                 <?PHP
                                  $literalMoney = new  EnLetras();
                                   $shoLiteralMoney = strtoupper($literalMoney -> valorEnletras($totalAPagar,$contextMoneda));
-                                  echo "<b>".$shoLiteralMoney."</b>";
+                                //   echo "<b>".$shoLiteralMoney."</b>";
+                                  echo "<b>Cien Pesos con 00/100</b>";
                                   ?>
                                       </span>
                                 </td>
