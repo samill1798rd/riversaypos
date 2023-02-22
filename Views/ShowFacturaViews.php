@@ -88,13 +88,12 @@ include('LiteralMoney.php');
                                 <td colspan="6" align="Center">
                                     <span style="color: #2b2b2b;">
                                     <?PHP
-                                    echo '
-                                    <span style="font-size: x-large; "> <div style="text-align: center;"> <strong>'.$razon.'</strong>  </div></span>';
+                                    echo '<span style="font-size: x-large; "> <div style="text-align: center;"> <strong>'.$razon.'</strong>  </div></span>';
                                     echo '<div style="text-align: center;">Dirrecion: '.$direccion.'</div> ';
                                     echo '<div style="text-align: center;">RNC: '.$nro.'</div> ';
                                     echo '<div style="text-align: center;"> Telefono : '.$telefono.'  </div> ';
                                     echo '<div style="text-align: center;">  FACTURA ORIGINAL</div> ';
-                                    echo ' -----------------------------------------------------------------------------------';
+                                    echo ' ---------------------------------------------------------------------';
                                     echo '<br>';
                                     ?>
                                    </span>
@@ -121,7 +120,7 @@ include('LiteralMoney.php');
                             <tr>
 
                                 <td colspan="6" align="center">
-                                    <span style="color: #2b2b2b;">    -----------------------------------------------------------------------------------</span>
+                                    <span style="color: #2b2b2b;">  ---------------------------------------------------------------------</span>
                                 </td>
                             </tr>
 
@@ -140,7 +139,7 @@ include('LiteralMoney.php');
                             <tr>
 
                                 <td colspan="6" align="center">
-                                    <span style="color: #2b2b2b;">    -----------------------------------------------------------------------------------</span>
+                                    <span style="color: #2b2b2b;"> ---------------------------------------------------------------------</span>
                                 </td>
                             </tr>
                             <tr>
@@ -170,7 +169,7 @@ include('LiteralMoney.php');
                             <tr>
 
                                 <td colspan="6" align="center">
-                                    <span style="color: #2b2b2b;">    -----------------------------------------------------------------------------------</span>
+                                    <span style="color: #2b2b2b;">---------------------------------------------------------------------</span>
                                 </td>
                             </tr>
 
@@ -213,7 +212,7 @@ include('LiteralMoney.php');
                             <tr>
 
                                 <td colspan="6" align="center">
-                                    <span style="color: #2b2b2b;">    -----------------------------------------------------------------------------------</span>
+                                    <span style="color: #2b2b2b;">---------------------------------------------------------------------</span>
                                 </td>
                             </tr>
 
@@ -227,7 +226,7 @@ include('LiteralMoney.php');
                             <tr>
 
                                 <td colspan="6" align="center">
-                                    <span style="color: #2b2b2b;">    -----------------------------------------------------------------------------------</span>
+                                    <span style="color: #2b2b2b;">---------------------------------------------------------------------</span>
                                 </td>
                             </tr>
 
