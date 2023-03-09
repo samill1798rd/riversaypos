@@ -536,6 +536,102 @@ class Conexion{
         return $query;
     }
 
+    public function registrarVenta($nombre, $ci, $totalAPagar, $efectivo, $cambio, $idClientei, $codigoControl, $fechaVenta)
+    {
+        $query = $this->con->query("INSERT INTO `ventatotal` (`idVentas`, `nombre`, `ci`, `fecha`, `totalApagar`, `efectivo`, `cambio`, `idClientei`, `codigoControl`) 
+                                            VALUES (NULL, '$nombre', '$ci', '$fechaVenta', '$totalAPagar', '$efectivo', '$cambio', '$idClientei', '$codigoControl')");
+        return $query;
+    }
+
+    public function getDatosVenta()
+    {
+        $query = $this->con->query("SELECT * FROM `ventatotal`");
+        return $query;
+    }
+
+    public function registrarDatosVenta($cantidad, $descripcion, $precio, $total, $tipo, $fechaVenta, $codigoControl, $idVentas, $estado)
+    {
+        $query = $this->con->query("INSERT INTO `datosventa` (`idDatosVentas`, `cantidad`, `descripcion`, `precio`, `total`, `tipo`, `fechaVenta`, `codigoControl`, `idVentas`, `estado`)
+                                      VALUES (NULL, '$cantidad', '$descripcion', '$precio', '$total', '$tipo', '$fechaVenta', '$codigoControl', '$idVentas', '$estado')");
+        return $query;
+    }
+
+    public function registrarDatosVentaTotal($cliente, $cantidad, $precio, $total, $codigoControl, $fechaVenta, $estado,$comentario)
+    {
+        $query = $this->con->query("INSERT INTO `datosventatotal` (`idVentas`, `cliente`, `cantidad`, `precio`, `total`, `codigoControl`, `fechaVenta`, `estado`, `comentario`) 
+                                       VALUES (NULL, '$cliente', '$cantidad', '$precio', '$total', '$codigoControl', '$fechaVenta', '$estado','$comentario')");
+        return $query;
+    }
+
+    public function registrarDatosClienteVenta($fechaVenta, $nitci, $cliente, $codigoControl, $idVentas, $estado)
+    {
+        $query = $this->con->query("INSERT INTO `datosclienteventa` (`idClienteVenta`, `fechaVenta`, `nitCliente`, `cliente`, `codigoControl`, `idVentas`, `estado`)
+                                             VALUES (NULL, '$fechaVenta', '$nitci', '$cliente', '$codigoControl', '$idVentas', '$estado')");
+        return $query;
+    }
+
+    public function registrarDatosFacturaVenta($nit, $factura, $numeroAutorizacion, $codigoControl, $idVentas, $estado)
+    {
+        $query = $this->con->query("INSERT INTO `datosfacturaventa` (`idDatosFactura`, `nit`, `factura`, `numeroAutorizacion`, `codigoControl`, `idVentas`, `estado`)
+                                              VALUES (NULL, '$nit', '$factura', '$numeroAutorizacion', '$codigoControl', '$idVentas', '$estado')");
+        return $query;
+    }
+
+    public function cleanRegistroPreventa()
+    {
+        $query = $this->con->query("truncate `preventa`");
+        return $query;
+    }
+
+    public function cleanClientData()
+    {
+        $query = $this->con->query("truncate `clientedato`");
+        return $query;
+    }
+
+    
+    public function getAllGastos()
+    {
+
+        $query = $this->con->query("SELECT * FROM `gastos` order by idgastos desc");
+        return $query;
+    }
+
+    
+    public function registerNewAccount($tipo, $descripcion, $entrada, $fechaRegistro, $usuario, $salida)
+    {
+
+        $query = $this->con->query("INSERT INTO `gastos` (`idgastos`, `descripcion`, `entrada`, `usuario`, `salida`, `tipo`,`fechaRegistro`) 
+                                            VALUES (NULL, '$descripcion', '$entrada', '$usuario', '$salida', '$tipo','$fechaRegistro')");
+        return $query;
+    }
+
+
+    public function deleteAccount($idCuenta)
+    {
+        $query = $this->con->query("DELETE FROM `gastos` WHERE `idgastos` = $idCuenta");
+        return $query;
+    }
+
+
+    public function updateAccount($tipo, $descripcion, $entrada, $fechaRegistro, $usuario, $salida, $idCuenta)
+    {
+
+        $query = $this->con->query("UPDATE `gastos` SET `descripcion` = '$descripcion', 
+                                                                `entrada` = '$entrada',
+                                                                `fechaRegistro` = '$fechaRegistro',
+                                                                 `usuario` = '$usuario', 
+                                                                 `salida` = '$salida', 
+                                                                 `tipo` = '$tipo' WHERE `idgastos` = $idCuenta");
+        return $query;
+    }
+
+
+
+
+
+   
+
 
 
 
