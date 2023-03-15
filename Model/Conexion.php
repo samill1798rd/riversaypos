@@ -654,18 +654,42 @@ class Conexion{
         return $query;
     }
 
+    
+    public function getAllVentas()
+    {
+        $query = $this->con->query('SELECT * FROM datosventatotal where estado=\'NoConsolidado\' order by idVentas ASC ');
+        return $query;
+    }
 
+    public function updateDatosclienteventa($codigoControl)
+    {
+        $query = $this->con->query("UPDATE `datosclienteventa` SET `estado` = 'Consolidado' WHERE `codigoControl` = '$codigoControl'");
+        return $query;
+    }
 
+    public function updateDatosfacturaventa($codigoControl)
+    {
+        $query = $this->con->query("UPDATE `datosfacturaventa` SET `estado` = 'Consolidado' WHERE `codigoControl` = '$codigoControl'");
+        return $query;
+    }
 
+    public function updateDatosventa($codigoControl)
+    {
+        $query = $this->con->query("UPDATE `datosventa` SET `estado` = 'Consolidado' WHERE `codigoControl` = '$codigoControl'");
+        return $query;
+    }
 
+    public function updateDatosventatotal($codigoControl)
+    {
+        $query = $this->con->query("UPDATE `datosventatotal` SET `estado` = 'Consolidado' WHERE `codigoControl` = '$codigoControl'");
+        return $query;
+    }
 
-   
-
-
-
-
-
-
+    public function insertarComentarioFicha($idVenta, $comentario)
+    {
+        $query = $this->con->query("UPDATE `datosventatotal` SET `comentario` = '$comentario' WHERE `idVentas` = $idVenta");
+        return $query;
+    }
 
 }
 
