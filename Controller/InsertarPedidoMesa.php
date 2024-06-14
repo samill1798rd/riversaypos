@@ -32,6 +32,7 @@ foreach ($productElegido as $product) {
 }
 $tipoPedido = 'Mesa';
 $urlViews = URL_VIEWS;
+$userId =  $idUsuario;
 $regiterPreventa = $con->insertarPreventaProducto($imagen, $nombreProducto, $precioVenta, $idProducto, $precioVenta, $idUsuario, $tipoPedido);
 
 require('../Views/RefreshPedido.php');

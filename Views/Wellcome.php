@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    include('Head.php');
+include('Head.php');
 ?>
 <body>
-    <section id="container" class="">
-        <header class="header dark-bg">
+<section id="container" class="">
+    <header class="header dark-bg">
             <div class="toggle-nav">
-                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom">
-                    <i class="icon_menu"></i>
-                </div>
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i
+                            class="icon_menu"></i></div>
             </div>
-            <?php include("Logo.php"); ?>
-            <div class="nav search-row" id="top_menu">
-                <ul class="nav top-menu">
-                    <li>
-                        <form class="navbar-form">
-                            <!-- <input class="form-control" placeholder="Buscar ..." type="text"> -->
-                        </form>
-                    </li> 
-                </ul>
-            </div>
-            <?php include("DropDown.php"); ?>
-        </header>
+            <?PHP include("Logo.php") ?>
+        <div class="nav search-row" id="top_menu">
+            <!--  search form start -->
+            <ul class="nav top-menu">
+                <li>
+                    <form class="navbar-form">
+<!--                              <input class="form-control" placeholder="Search" type="text">-->
+                    </form>
+                </li>
+            </ul>
+            <!--  search form end -->
+        </div>
+      <?PHP include ("DropDown.php"); ?>
+    </header>
+ <?PHP include ("Menu.php")?>
 
-        <?php include("Menu.php"); ?>
-    </section>
+</section>
 
-    <!--sidebar end-->
+<!--sidebar end-->
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -70,7 +71,7 @@
                     <i class="fa fa-money"></i>
                     <div class="count"><?PHP
                         //echo $gastototales;
-                        ?>$RD.
+                        ?>$us.
                     </div>
                     <div class="title">Gastos y Entradas</div>
                 </div><!--/.info-box-->
@@ -109,13 +110,20 @@
                                     <th>FECHA</th>
                                 </tr>
                                 </thead>
+                                <?PHP
+                                while ($ventas = mysqli_fetch_array($totalVentas)) {
+                                ?>
+
                                 <tr>
-                                    <td>PRODUCTO</td>
-                                    <td>CANTIDAD</td>
-                                    <td>PRECIO</td>
-                                    <td>TOTAL VENDIDO</td>
-                                    <td>FECHA</td>
+
+                                    <td> <?PHP echo $ventas['producto']; ?></td>
+                                    <td> <?PHP echo $ventas['cantidad']; ?></td>
+                                    <td> <?PHP echo $ventas['precio']; ?></td>
+                                    <td> <?PHP echo $ventas['totalVendido']; ?></td>
+                                    <td> <?PHP echo $ventas['fechaVenta']; ?></td>
+
                                 </tr>
+                                <?php } ?>
 
                             </table>
                         </div>
@@ -158,6 +166,8 @@
 
 
 
-    <?php include("LibraryJs.php"); ?>
+
+
+<?PHP include ("LibraryJs.php"); ?>
 </body>
 </html>

@@ -22,6 +22,7 @@ foreach ($onlyUserSession as $user) {
 $deleteOnlyPreventaProducto = $con->deleteOnlyPreventa($idProducto,$tipo);
 
 $urlViews = URL_VIEWS;
+$userId =  $idUsuario;
 
 require('../Views/RefreshPedido.php');
 ?>

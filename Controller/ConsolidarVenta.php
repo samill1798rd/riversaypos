@@ -14,8 +14,8 @@ $con = new conexion();
 
 if (isset($_GET['idConsolidar'])) {
 
-    $idVenta = $_GET['idConsolidar'];
-    $codigoControl = $_GET['codigoControl'];
+    $idVenta = $_GET['idConsolidar'];  
+     $codigoControl = $_GET['codigoControl'];
     $usuarioLogin = $_GET['usuarioLogin'];
     $passwordLogin = $_GET['passwordLogin'];
 

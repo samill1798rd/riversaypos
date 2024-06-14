@@ -62,6 +62,7 @@ $datosFactura = $con-> getDatosFactura();
      $direccion = $facturaPropieario['direccion'];
      $nro = $facturaPropieario['nro'];
      $telefono = $facturaPropieario['telefono'];
+     $mensajeFactura = $facturaPropieario['mensaje'];
  }
 
  $datosDosificacion = $con->getDatosDosificacion();
@@ -95,8 +96,16 @@ while ($dataMonedaValues = mysqli_fetch_array($dataMoneda)){
 
 $fechaCodigoControl = date("Ymd");
 
-$codigoControl = new CodigoControl($autorizacion, $factura, $ci, $fechaCodigoControl, $totalApagar, $llave);
-$getCodigoControl = $codigoControl->generar();
+$ultimoNumeroReult = $con->getUltimoNumeroVentasTotales();
+$prefijo = "FAC-000";
+
+$ultimoNumero = $ultimoNumeroReult[0]["ultimoNumero"];
+
+$codigoControl = new CodigoControl();
+$getCodigoControl = $codigoControl->generarNumeroFactura($prefijo, $ultimoNumero);
+
+$ficha = $ultimoNumero+1;
+
 
 $getDatosFecha = explode("-",$fechaLimite);
 $fechaLimiteAnio=$getDatosFecha[0];
@@ -109,10 +118,10 @@ $fechaLimiteEmision = $fechaLimiteDia.' / '.$fechaLimiteMes.' / '.$fechaLimiteAn
 date_default_timezone_set("America/Caracas" ) ;
 $dateInicial= date('Y-m-d');
 $dateFinal= date('Y-m-d');
-$getNumeroFicha = $con->getNumFicha($dateInicial,$dateFinal);
-foreach ( $getNumeroFicha as $numFicha){
-    $ficha = $numFicha['numficha'];
-}
+// $getNumeroFicha = $con->getNumFicha($dateInicial,$dateFinal);
+// foreach ( $getNumeroFicha as $numFicha){
+//     $ficha = $numFicha['numficha'];
+// }
 
 
 

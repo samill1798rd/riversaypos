@@ -20,7 +20,7 @@
             <td><b>Opcion</b></td>
         </tr>
         <?PHP
-        $showPreventa = $con->getPreventa();
+        $showPreventa = $con->getPreventa($userId);
         while ($preventa = mysqli_fetch_array($showPreventa)) {
             ?>
             <tr>
@@ -53,7 +53,7 @@
                 <h2>
                     <strong>
                         <?PHP
-                        $totalPreventaConsulta = $con->getTotalPreventa();
+                        $totalPreventaConsulta = $con->getTotalPreventa($userId);
                         while ($totalVenta = mysqli_fetch_array($totalPreventaConsulta)) {
                             $userId = $totalVenta['idUser'];
                             echo $totalVenta['total'];

@@ -23,6 +23,13 @@ foreach($searchUser as $user){
     $foto = $user['foto'];
 }
 
+$colorElegido="#4e4e4e";
+$colorDefecto="#0061c2";
+$idMenu="4";
+
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+
 $tipoDeAlerta = $con->getMensajeAlerta();
 
 foreach($tipoDeAlerta as $tipoAlerta){
@@ -44,7 +51,14 @@ $urlViews = URL_VIEWS;
 
 $allCliente = $con->getAllCliente();
 
-$menuMain = $con->getMenuMain();
+
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+}
+
 require('../Views/ClienteViews.php');
 
 ?>

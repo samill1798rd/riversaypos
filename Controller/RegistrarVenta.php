@@ -35,9 +35,11 @@ if (isset($_GET['RegistarVenta'])) {
         $nombres = $user['nombre'];
         $password = $user['password'];
         $login =$user['login'];
+        $id_usuario = $user['id_usu'];
     }
     $urlViews = URL_VIEWS;
     $userLogueado = $nombres;
+    $userId =  $id_usuario;
 
 
     $datosFactura = $con->getDatosFactura();
@@ -47,6 +49,7 @@ if (isset($_GET['RegistarVenta'])) {
         $direccion = $facturaPropieario['direccion'];
         $nro = $facturaPropieario['nro'];
         $telefono = $facturaPropieario['telefono'];
+        $mensajeFactura = $facturaPropieario['mensaje'];
     }
 
 
@@ -96,8 +99,13 @@ if (isset($_GET['RegistarVenta'])) {
     $fechaLimiteEmision = $fechaLimiteDia . ' / ' . $fechaLimiteMes . ' / ' . $fechaLimiteAnio;
 
 
-    $getCodigoControl = new CodigoControl($autorizacion, $factura, $ci, $fechaCodigoControl, $totalApagar, $llave);
-    $codigoControl = $getCodigoControl->generar();
+    $ultimoNumeroReult = $con->getUltimoNumeroVentasTotales();
+    $prefijo = "FAC-000";
+    
+    $ultimoNumero = $ultimoNumeroReult[0]["ultimoNumero"];
+    
+    $getCodigoControl = new CodigoControl();
+    $codigoControl = $getCodigoControl->generarNumeroFactura($prefijo, $ultimoNumero);
 
 
     $registrarVentaTotal = $con->registrarVenta($nombreClienteDato, $ci, $totalAPagar, $efectivo, $cambio, $idClientei, $codigoControl, $fechaVenta);
@@ -131,7 +139,7 @@ if (isset($_GET['RegistarVenta'])) {
         $registrarPreventaTotalFinal = $con->registrarDatosVenta($cantidad, $descripcion, $precio, $total, $tipo, $fechaVenta, $codigoControl, $idVentas, $estado);
     }
 
-    $registrarDatosVentaTotal = $con->registrarDatosVentaTotal($nombreClienteDato, $cantidad, $precio, $total, $codigoControl, $fechaVenta, $estado,$comentario);
+    $registrarDatosVentaTotal = $con->registrarDatosVentaTotal($nombreClienteDato, $cantidad, $precio, $total, $codigoControl, $fechaVenta, $estado,$comentario,$idVentas);
 
     $registrarClienteDatosFinal = $con->registrarDatosClienteVenta($fechaVenta, $ci, $nombreClienteDato, $codigoControl, $idVentas, $estado);
 
@@ -140,7 +148,7 @@ if (isset($_GET['RegistarVenta'])) {
     /// Clean for new client
 
     $cleanDataCliente = $con->cleanClientData();
-    $cleanDataPreventa = $con->cleanRegistroPreventa();
+    $cleanDataPreventa = $con->cleanRegistroPreventa($userId);
 
  header("Location: Ventas.php?usuario=$login&password=$password");
 

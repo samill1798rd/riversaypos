@@ -6,8 +6,8 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-$usuarioLogin = $_POST['usuarioLogin'];
-$passwordLogin = $_POST['passwordLogin'];
+$usuario = $_POST['usuarioLogin'];
+$password = $_POST['passwordLogin'];
 
 $con = new Conexion();
 
@@ -41,6 +41,7 @@ if(isset($_POST['update_data_moneda'])){
   
 }
 
-header("Location: Moneda.php?usuario=$usuarioLogin&password=$passwordLogin&estado='Activo'");
+header("Location: Moneda.php?usuario=$usuario&password=$password");
+// header("Location: Moneda.php?usuario=$usuarioLogin&password=$passwordLogin&estado='Activo'");
 
 ?>

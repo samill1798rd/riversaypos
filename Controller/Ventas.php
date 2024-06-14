@@ -23,6 +23,13 @@ foreach($searchUser as $user){
     $foto = $user['foto'];
 }
 
+$colorElegido="#4e4e4e";
+$colorDefecto="#0061c2";
+$idMenu="7";
+
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+
 $tipoDeAlerta = $con->getMensajeAlerta();
 
 foreach($tipoDeAlerta as $tipoAlerta){
@@ -41,6 +48,7 @@ if(!isset($_GET['estado'])){
 $userLogueado = $nombre;
 $imageUser = $foto;
 $urlViews = URL_VIEWS;
+$userId =  $idUsuario;
 
 $tipoDeMoneda = $con->getTipoMoneda();
 foreach ($tipoDeMoneda as $moneda){
@@ -50,7 +58,15 @@ foreach ($tipoDeMoneda as $moneda){
 
 
 $allProducto =$con->getAllProducto();
-$menuMain = $con->getMenuMain();
+
+
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+}
+
 require('../Views/VentasViews.php');
 
 ?>

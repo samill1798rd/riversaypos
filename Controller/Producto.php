@@ -22,12 +22,13 @@ foreach ($searchUser as $user) {
     $password = $user['password'];
     $foto = $user['foto'];
 }
+
 $colorElegido="#4e4e4e";
 $colorDefecto="#0061c2";
 $idMenu="5";
 
-//$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
-//$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
 
 $tipoDeAlerta = $con->getMensajeAlerta();
 foreach ($tipoDeAlerta as $tipoAlerta) {
@@ -50,7 +51,15 @@ $imageUser = $foto;
 $allProducto =$con->getAllProducto();
 $tipoProductos = $con->getAllTipoProducto();
 
-$menuMain = $con->getMenuMain();
+
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+}
+
+
 require("../Views/ProductoViews.php");
 
 

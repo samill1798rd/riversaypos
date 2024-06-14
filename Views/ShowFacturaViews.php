@@ -102,17 +102,17 @@ include('LiteralMoney.php');
 
                             <tr>
 
-                                <td colspan="3"><span style="color: #2b2b2b;"><b>NIT : </b></span></td>
+                                <td colspan="3"><span style="color: #2b2b2b;"><b>RNC : </b></span></td>
                                 <td colspan="3"><span style="color: #2b2b2b;"><?PHP echo $nit?></span></td>
                             </tr>
                             <tr>
                                 <td colspan="3"><span style="color: #2b2b2b;"><b>N&ordm; FACTURA : </b></span></td>
-                                <td colspan="3"><span style="color: #2b2b2b;"><?PHP echo $factura?></span></td>
+                                <td colspan="3"><span style="color: #2b2b2b;"><?PHP echo $getCodigoControl?></span></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="3"><span style="color: #2b2b2b;"><b>N&ordm; AUTORIZACION : </b></span></td>
                                 <td colspan="3"><span style="color: #2b2b2b;"><?PHP echo $autorizacion?></span></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td colspan="6" align="center"><span style="color: #2b2b2b;"> Otros servicios de comidas</span></td>
                             </tr>
@@ -183,7 +183,7 @@ include('LiteralMoney.php');
                             <tr>
                                 <td colspan="6"><span style="color: #2b2b2b;"><b>Cambio : <?PHP echo $tipoMoneda; ?> </b> <?PHP echo $cambio; ?></span></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="6">&nbsp;<span style="color: #2b2b2b;"> <b>Son : </b>
                                 <?PHP
                                  $literalMoney = new  EnLetras();
@@ -193,14 +193,14 @@ include('LiteralMoney.php');
                                   ?>
                                       </span>
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr> -->
+                            <!-- <tr>
                                 <td colspan="6"><span style="color: #2b2b2b;"><b>Codigo de control : <?PHP echo $getCodigoControl; ?></b></span></td>
-                            </tr>
-
+                            </tr> -->
+<!-- 
                             <tr>
                                 <td colspan="6"><span style="color: #2b2b2b;"><b>Fecha Limite de Emision :  <?PHP echo $fechaLimiteEmision; ?></b></span></td>
-                            </tr>
+                            </tr> -->
 
 
                             <tr>
@@ -218,8 +218,7 @@ include('LiteralMoney.php');
 
 
                             <tr>
-                                <td colspan="6" align="center"><span style="color: #2b2b2b;"> " Esta factura conttribuye al desarrollo del pais el uso
-                                    ilicito de esta sera sancionado de acuerdo a ley "</span>
+                                <td colspan="6" align="center"><span style="color: #2b2b2b;"> " <?PHP echo $mensajeFactura;?> "</span>
                                 </td>
                             </tr>
 

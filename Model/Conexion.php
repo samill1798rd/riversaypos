@@ -50,7 +50,7 @@ class Conexion{
         return $retorno;
     }
 
-    public function getMenuMainVentas(){
+    public function getMenuMainToVentas(){
 
         $query = $this->con->query("SELECT * FROM menu WHERE acceso = 'A'");
 
@@ -65,6 +65,22 @@ class Conexion{
 
         return $retorno;
     }
+
+    // public function getMenuMainVentas(){
+
+    //     $query = $this->con->query("SELECT * FROM menu WHERE acceso = 'A'");
+
+    //     $retorno = [];
+
+    //     $i = 0;
+
+    //     while ($fila = $query->fetch_assoc()){
+    //         $retorno[$i] = $fila;
+    //         $i++;
+    //     }
+
+    //     return $retorno;
+    // }
 
     public function getAllUserData(){
 
@@ -132,13 +148,14 @@ class Conexion{
         return $query;
     }
 
-    public function updateDataFactura($propietario, $razon, $direccion, $nro, $telefono, $iddatos)
+    public function updateDataFactura($propietario, $razon, $direccion, $nro, $telefono, $iddatos, $mensaje)
     {
         $query = $this->con->query("UPDATE `datos` SET `propietario` = '$propietario', 
                                                        `razon` = '$razon',
                                                        `direccion` = '$direccion',
                                                        `nro` = '$nro', 
-                                                       `telefono` = '$telefono' 
+                                                       `telefono` = '$telefono',
+                                                       `mensaje` = '$mensaje' 
                                                         WHERE `datos`.`iddatos` = $iddatos");
 
         return $query;
@@ -406,19 +423,21 @@ class Conexion{
         return $query;
     }
 
-    public function getPreventa()
+    public function getPreventa($idUser)
     {
         $query = $this->con->query("SELECT idPreventa,imagen,producto,COUNT(producto) as cantidad, SUM(precio) as totalPrecio,idProducto,pventa,idUser,precio,tipo 
                                             FROM `preventa` 
+                                            WHERE `idUser` = '$idUser'
                                             GROUP BY producto,idProducto,tipo 
                                             ORDER BY idPreventa ASC");
         return $query;
     }
 
     
-    public function getTotalPreventa()
+    public function getTotalPreventa($idUser)
     {
-        $query = $this->con->query("SELECT Sum(precio) as total , idUser FROM `preventa`");
+        $query = $this->con->query("SELECT Sum(precio) as total , idUser FROM `preventa` 
+                                    WHERE `idUser` = $idUser");
         return $query;
     }
 
@@ -443,9 +462,9 @@ class Conexion{
     }
 
     
-    public function deleteAllPreventa()
+    public function deleteAllPreventa($idUser)
     {
-        $query = $this->con->query("TRUNCATE `preventa`");
+        $query = $this->con->query("DELETE FROM `preventa` WHERE `idUser` = $idUser");
         return $query;
     }
 
@@ -538,8 +557,8 @@ class Conexion{
 
     public function registrarVenta($nombre, $ci, $totalAPagar, $efectivo, $cambio, $idClientei, $codigoControl, $fechaVenta)
     {
-        $query = $this->con->query("INSERT INTO `ventatotal` (`idVentas`, `nombre`, `ci`, `fecha`, `totalApagar`, `efectivo`, `cambio`, `idClientei`, `codigoControl`) 
-                                            VALUES (NULL, '$nombre', '$ci', '$fechaVenta', '$totalAPagar', '$efectivo', '$cambio', '$idClientei', '$codigoControl')");
+        $query = $this->con->query("INSERT INTO `ventatotal` (`nombre`, `ci`, `fecha`, `totalApagar`, `efectivo`, `cambio`, `idClientei`, `codigoControl`) 
+                                            VALUES ('$nombre', '$ci', '$fechaVenta', '$totalAPagar', '$efectivo', '$cambio', '$idClientei', '$codigoControl')");
         return $query;
     }
 
@@ -551,15 +570,15 @@ class Conexion{
 
     public function registrarDatosVenta($cantidad, $descripcion, $precio, $total, $tipo, $fechaVenta, $codigoControl, $idVentas, $estado)
     {
-        $query = $this->con->query("INSERT INTO `datosventa` (`idDatosVentas`, `cantidad`, `descripcion`, `precio`, `total`, `tipo`, `fechaVenta`, `codigoControl`, `idVentas`, `estado`)
-                                      VALUES (NULL, '$cantidad', '$descripcion', '$precio', '$total', '$tipo', '$fechaVenta', '$codigoControl', '$idVentas', '$estado')");
+        $query = $this->con->query("INSERT INTO `datosventa` ( `cantidad`, `descripcion`, `precio`, `total`, `tipo`, `fechaVenta`, `codigoControl`, `idVentas`, `estado`)
+                                      VALUES ('$cantidad', '$descripcion', '$precio', '$total', '$tipo', '$fechaVenta', '$codigoControl', '$idVentas', '$estado')");
         return $query;
     }
 
-    public function registrarDatosVentaTotal($cliente, $cantidad, $precio, $total, $codigoControl, $fechaVenta, $estado,$comentario)
+    public function registrarDatosVentaTotal($cliente, $cantidad, $precio, $total, $codigoControl, $fechaVenta, $estado,$comentario, $idDatosVentasTotal)
     {
-        $query = $this->con->query("INSERT INTO `datosventatotal` (`idVentas`, `cliente`, `cantidad`, `precio`, `total`, `codigoControl`, `fechaVenta`, `estado`, `comentario`) 
-                                       VALUES (NULL, '$cliente', '$cantidad', '$precio', '$total', '$codigoControl', '$fechaVenta', '$estado','$comentario')");
+        $query = $this->con->query("INSERT INTO `datosventatotal` ( `cliente`, `cantidad`, `precio`, `total`, `codigoControl`, `fechaVenta`, `estado`, `comentario`, `idDatosVentasTotal`) 
+                                       VALUES ('$cliente', '$cantidad', '$precio', '$total', '$codigoControl', '$fechaVenta', '$estado','$comentario','$idDatosVentasTotal')");
         return $query;
     }
 
@@ -577,9 +596,9 @@ class Conexion{
         return $query;
     }
 
-    public function cleanRegistroPreventa()
+    public function cleanRegistroPreventa($idUser)
     {
-        $query = $this->con->query("truncate `preventa`");
+        $query = $this->con->query("DELETE FROM `preventa` WHERE `idUser` = $idUser");
         return $query;
     }
 
@@ -657,7 +676,7 @@ class Conexion{
     
     public function getAllVentas()
     {
-        $query = $this->con->query('SELECT * FROM datosventatotal where estado=\'NoConsolidado\' order by idVentas ASC ');
+        $query = $this->con->query('SELECT * FROM datosventatotal where estado=\'NoConsolidado\' order by idDatosVentasTotal ASC ');
         return $query;
     }
 
@@ -690,6 +709,191 @@ class Conexion{
         $query = $this->con->query("UPDATE `datosventatotal` SET `comentario` = '$comentario' WHERE `idVentas` = $idVenta");
         return $query;
     }
+
+      public function getUltimoNumeroVentasTotales()
+      {
+          $query = $this->con->query("SELECT MAX(idVentas) as ultimoNumero FROM ventatotal");
+          $retorno = [];
+  
+          $i = 0;
+          while ($fila = $query->fetch_assoc()) {
+              $retorno[$i] = $fila;
+              $i++;
+          }
+          return $retorno;
+      }
+
+      public function getVentasDia($fechaInicial,$fechaFinal)
+      {
+          $query = $this->con->query("SELECT * FROM `datosventatotal` WHERE fechaVenta >= '$fechaInicial' and fechaVenta < '$fechaFinal' and estado='Consolidado'");
+          return $query;
+      }
+  
+  
+      public function getVentasTotalesDia($fechaInicial,$fechaFinal)
+      {
+          $query = $this->con->query("SELECT SUM(total) as totalVentas FROM `datosventatotal` WHERE fechaVenta >= '$fechaInicial' and fechaVenta < '$fechaFinal' and estado='Consolidado'");
+          return $query;
+      }
+
+      public function getVentasProductoByDia($fechaInicial,$fechaFinal)
+      {
+          $query = $this->con->query("SELECT * FROM `datosventa` WHERE fechaVenta >= '$fechaInicial' and fechaVenta < '$fechaFinal' and estado='Consolidado'");
+          return $query;
+      }
+
+      
+    public function getVentasProductoTotalesDia($fechaInicial,$fechaFinal)
+    {
+        $query = $this->con->query("SELECT SUM(total) as totalVentas FROM `datosventa` WHERE fechaVenta >= '$fechaInicial' and fechaVenta < '$fechaFinal' and estado='Consolidado'");
+        return $query;
+    }
+
+    public function getVentasMensuales()
+    {
+
+        $query = $this->con->query("SELECT MonthName(fecha) as mes FROM datosventatotal GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getSumaTotalVentasByMes($mes, $anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as totalVentas FROM datosventatotal WHERE MONTH(fechaVenta) = '$mes' AND YEAR(fechaVenta) = '$anio'");
+        return $query;
+    }
+
+    
+    public function getTotalVentasByMes($mes, $anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, DAY(fechaVenta) as dia FROM datosventatotal WHERE MONTH(fechaVenta) = '$mes' AND YEAR(fechaVenta) = '$anio' GROUP BY DAY(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getGatosDeLaEmpresa($fechaVentasI, $fechaVentasF)
+    {
+        $query = $this->con->query("SELECT  *
+                                           FROM `gastos`
+                                           WHERE fechaRegistro 
+                                           BETWEEN '" . $fechaVentasI . "'  AND '" . $fechaVentasF . "' ");
+        return $query;
+    }
+
+    public function getTotalGatosDeLaEmpresa($fechaVentasI, $fechaVentasF)
+    {
+        $query = $this->con->query("SELECT  SUM(salida) as totalSalida
+                                           FROM `gastos`
+                                           WHERE fechaRegistro 
+                                           BETWEEN '" . $fechaVentasI . "'  AND '" . $fechaVentasF . "' ");
+        return $query;
+    }
+
+    public function getEntradasDeLaEmpresa($fechaVentasI, $fechaVentasF)
+    {
+        $query = $this->con->query("SELECT  SUM(entrada) as totalEntrada
+                                           FROM `gastos`
+                                           WHERE fechaRegistro 
+                                           BETWEEN '" . $fechaVentasI . "'  AND '" . $fechaVentasF . "' ");
+        return $query;
+    }
+
+    public function getUtilidadDeLaEmpresa($fechaVentasI, $fechaVentasF)
+    {
+        $query = $this->con->query("SELECT  (SUM(entrada) - SUM(salida)) as utilidad 
+                                           FROM `gastos`
+                                           WHERE fechaRegistro 
+                                           BETWEEN '" . $fechaVentasI . "'  AND '" . $fechaVentasF . "' ");
+        return $query;
+    }
+
+    public function getTotalVentasByYear($anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as totalVentas FROM datosventatotal WHERE  YEAR(fechaVenta) = '$anio'");
+        return $query;
+    }
+    
+    public function getTotalVentasByAnio($anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal  WHERE  YEAR(fechaVenta) = '$anio'   GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getTotalVentas6Meses()
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal  WHERE fechaVenta BETWEEN date_sub(now(), interval 6 month) AND NOW() GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getGrandTotalVentas6Meses()
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as totalVentas FROM datosventatotal WHERE fechaVenta BETWEEN date_sub(now(), interval 6 month) AND NOW()");
+        return $query;
+    }
+
+    public function getSumTotalVentasMensuales()
+    {
+        $query = $this->con->query("SELECT MonthName(fechaVenta) as mes FROM datosventatotal  GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    
+    public function getTotalVentasMensual()
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal where estado='Consolidado' GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getTotalVentas()
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal  where estado='Consolidado'   GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getTotalYearVentas($anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal  WHERE  estado='Consolidado' and  YEAR(fechaVenta) = '$anio'   GROUP BY MONTH(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function getTotal6MonthVentas()
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, MonthName(fechaVenta) as mes FROM datosventatotal WHERE estado='Consolidado'  and fechaVenta BETWEEN date_sub(now(), interval 6 month) AND NOW() GROUP BY MONTH(fechaVenta)  ASC");
+        return $query;
+    }
+
+    public function getTotalByMonthVentas($mes, $anio)
+    {
+        $query = $this->con->query("SELECT SUM(cantidad * precio) as total, DAY(fechaVenta) as dia FROM datosventatotal WHERE  estado='Consolidado' and MONTH(fechaVenta) = '$mes' AND YEAR(fechaVenta) = '$anio'   GROUP BY DAY(fechaVenta) ASC");
+        return $query;
+    }
+
+    public function updateOpcionElegida($colorElegido,$idMenu)
+    {
+
+        $query = $this->con->query("UPDATE `menu` SET `color` = '$colorElegido' WHERE `idmenu` = $idMenu ");
+
+        return $query;
+    }
+
+    public function updateOpcionDefecto($colorDefecto,$idMenu)
+    {
+        $query = $this->con->query("UPDATE `menu` SET `color` = '$colorDefecto' WHERE `idmenu` != $idMenu ");
+
+        return $query;
+    }
+
+    public function getDataVentasTotal($fechaVentasI, $fechaVentasF)
+    {
+        $query = $this->con->query("SELECT descripcion as producto, cantidad, precio, SUM(cantidad * precio) as totalVendido,fechaVenta FROM `datosventa` 
+                                           where estado='Consolidado' and fechaVenta  BETWEEN '" . $fechaVentasI . "'  AND '" . $fechaVentasF . "' group by descripcion");
+
+        return $query;
+    }
+
+
+
+
+
+  
 
 }
 

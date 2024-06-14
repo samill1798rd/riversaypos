@@ -23,12 +23,12 @@ foreach ($searchUser as $user) {
     $foto = $user['foto'];
 }
 
-//$colorElegido="#4e4e4e";
-//$colorDefecto="#0061c2";
-//$idMenu="10";
+$colorElegido="#4e4e4e";
+$colorDefecto="#0061c2";
+$idMenu="10";
 
-//$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
-//$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
 
 $tipoDeAlerta = $con->getMensajeAlerta();
 foreach ($tipoDeAlerta as $tipoAlerta) {
@@ -50,10 +50,17 @@ $imageUser = $foto;
 
 $allVentas =$con->getAllVentas();
 
-$menuMain = $con->getMenuMain();
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+    require("../Views/ConsolidarViews.php");
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+    require('../Views/WellcomeVentas.php');
+
+}
 
 
-require("../Views/ConsolidarViews.php");
 
 
 ?>

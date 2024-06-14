@@ -15,9 +15,12 @@ $onlyUserSession = $con->getOnlyUserData($idUsuario);
 foreach ($onlyUserSession as $user) {
     $usuario = $user['login'];
     $password = $user['password'];
+    $id_usuario = $user['id_usu'];
 }
 
-$deleteAllPreventa = $con->deleteAllPreventa();
+$userId =  $id_usuario;
+
+$deleteAllPreventa = $con->deleteAllPreventa($$userId);
 
 $urlViews = URL_VIEWS;
 

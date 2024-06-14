@@ -18,7 +18,7 @@ $tamaño = 5; //Tamaño de Pixel
 $level = 'Q'; //Precisión Baja  L = Baja  M = Mediana Q = Alta  H= Máxima
 $framSize = 3; //Tamaño en blanco
 
-$contenido = 'No. Factura '.$factura; //Texto
+$contenido = 'No. Factura '.$getCodigoControl; //Texto
 
 //Enviamos los parametros a la Función para generar código QR
 QRcode::png($contenido, $filename, $level, $tamaño, $framSize);

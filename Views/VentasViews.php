@@ -3,7 +3,7 @@
 <?php
 include('Head.php');
 ?>
-<body>
+<body> 
 <section id="container" class="">
     <header class="header dark-bg">
         <style>
@@ -120,12 +120,48 @@ include('Head.php');
                                         </ul>
 
                                     </header>
+
                                     <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered table-hover" id="dataTables-venta">
+                    <thead>
+                    <tr>
+                        <th>IMAGEN</th>
+                        <th> CODIGO</th>
+                        <th> PRODUCTO</th>
+                        <th> PRECIO</th>
+                        <th> AGREGAR</th>
+                    </tr>
+                    </thead>
+                    <?PHP
+                    while ($product = mysqli_fetch_array($allProducto)) {
+                        ?>
+
+                        <tr>
+                            <td><img src="<?php echo $urlViews . $product['imagen'] ?>" height="50"
+                                     width="50"></td>
+                            <td> <?PHP echo $product['codigo']; ?></td>
+                            <td> <?PHP echo $product['nombreProducto']; ?></td>
+                            <td> <?PHP echo $product['precioVenta']; ?></td>
+                            <td>
+                            <a onclick="insertarPedidoLlevar('<?PHP echo $product['idproducto'];?>','<?PHP echo $idUsuario;?>')" data-name="Mouse" style="text-decoration: none; cursor: pointer;"
+                            class="view-details-link btn btn-success">Agregar</a>
+                            </td>
+                        </tr>
+
+                    <?php } ?>
+                </table>
+            </div>
+        </div>
+
+
+
+                                    <!-- <div class="panel-body">
                                         <div class="tab-content">
                                             <div id="home" class="tab-pane active">
 
 <!--                                                id="dataTables-example"-->
-
+<!-- 
                                                 <table class="table table-striped table-bordered table-hover">
                                                     <thead>
                                                     <tr>
@@ -134,12 +170,12 @@ include('Head.php');
                                                      ?>
 
                                                     </tr>
-                                                    </thead>
+                                                    </thead> -->
 
-                                                </table>
+                                                <!-- </table>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>  -->
                                 </div>
                             </section>
 
@@ -166,8 +202,17 @@ include('Head.php');
 </section>
 <!--main content end-->
 
+
+
 <?PHP include("LibraryJs.php"); ?>
 
-
+<script>
+      $(document).ready(function() {
+            // Initialize DataTable if not already initialized
+            if (!$.fn.dataTable.isDataTable('#dataTables-venta')) {
+                $('#dataTables-venta').DataTable();
+            }
+        });
+</script>
 </body>
 </html>

@@ -57,7 +57,7 @@ include('Head.php');
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr>
-                        <th><i class="icon_profile"></i> NUM FICHA</th>
+                        <th><i class="icon_profile"></i> NUM DE VENTA</th>
                         <th><i class="icon_profile"></i> FECHA</th>
                         <th><i class="icon_briefcase_alt"></i> CLIENTE</th>
                         <th><i class="icon_profile"></i> TOTAL Sus.</th>
@@ -73,7 +73,7 @@ include('Head.php');
                         ?>
 
                         <tr>
-                            <td align="center"><?php echo $ventas['idVentas']; ?></td>
+                            <td align="center"><?php echo $ventas['idDatosVentasTotal']; ?></td>
                             <td><?php echo $ventas['fechaVenta']; ?></td>
                             <td><?php echo $ventas['cliente']; ?></td>
                             <td align="center" ><?php echo $ventas['total']; ?></td>

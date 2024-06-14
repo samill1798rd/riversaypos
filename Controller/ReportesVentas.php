@@ -49,7 +49,12 @@ $userLogueado = $nombres;
 $imageUser = $foto;
 
 
-$menuMain = $con->getMenuMain();
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+}
 
 
 require("../Views/ReporteViews.php");

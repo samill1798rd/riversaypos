@@ -46,6 +46,7 @@ $datosFactura = $con-> getDatosFactura();
      $direccion = $facturaPropieario['direccion'];
      $nro = $facturaPropieario['nro'];
      $telefono = $facturaPropieario['telefono'];
+     $mensajeFactura = $facturaPropieario['mensaje'];
  }
 
  $datosDosificacion = $con->getDatosDosificacion();
@@ -77,26 +78,39 @@ while ($dataMonedaValues = mysqli_fetch_array($dataMoneda)){
     $tipoMoneda = $dataMonedaValues['tipoMoneda'];
 }
 
-$fechaCodigoControl = date("Ymd");
 
-$codigoControl = new CodigoControl($autorizacion, $factura, $nit, $fechaCodigoControl, $totalApagar, $llave);
-$getCodigoControl = $codigoControl->generar();
 
-$getDatosFecha = explode("-",$fechaLimite);
-$fechaLimiteAnio=$getDatosFecha[0];
-$fechaLimiteMes=$getDatosFecha[1];
-$fechaLimiteDia=$getDatosFecha[2];
+$ultimoNumeroReult = $con->getUltimoNumeroVentasTotales();
+$prefijo = "FAC-000";
 
-$fechaLimiteEmision = $fechaLimiteDia.' / '.$fechaLimiteMes.' / '.$fechaLimiteAnio;
+$ultimoNumero = $ultimoNumeroReult[0]["ultimoNumero"];
 
-date_default_timezone_set("America/Caracas" ) ;
-$dateInicial= date('Y-m-d');
-$dateFinal= date('Y-m-d');
-$getNumeroFicha = $con->getNumFicha($dateInicial,$dateFinal);
+$codigoControl = new CodigoControl();
+$getCodigoControl = $codigoControl->generarNumeroFactura($prefijo, $ultimoNumero);
 
-foreach ( $getNumeroFicha as $numFicha){
-    $ficha = $numFicha['numficha'];
-}
+$ficha = $ultimoNumero+1;
+
+
+// $fechaCodigoControl = date("Ymd");
+
+// $codigoControl = new CodigoControl($autorizacion, $factura, $nit, $fechaCodigoControl, $totalApagar, $llave);
+// $getCodigoControl = $codigoControl->generar();
+
+// $getDatosFecha = explode("-",$fechaLimite);
+// $fechaLimiteAnio=$getDatosFecha[0];
+// $fechaLimiteMes=$getDatosFecha[1];
+// $fechaLimiteDia=$getDatosFecha[2];
+
+// $fechaLimiteEmision = $fechaLimiteDia.' / '.$fechaLimiteMes.' / '.$fechaLimiteAnio;
+
+// date_default_timezone_set("America/Caracas" ) ;
+// $dateInicial= date('Y-m-d');
+// $dateFinal= date('Y-m-d');
+// $getNumeroFicha = $con->getNumFicha($dateInicial,$dateFinal);
+
+// foreach ( $getNumeroFicha as $numFicha){
+//     $ficha = $numFicha['numficha'];
+// }
 
 $menuMain = $con->getMenuMain();
 require('../Views/SinFacturaViews.php');

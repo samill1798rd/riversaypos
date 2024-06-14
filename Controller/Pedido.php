@@ -23,12 +23,12 @@ foreach ($searchUser as $user) {
     $foto = $user['foto'];
 }
 
-//$colorElegido="#4e4e4e";
-//$colorDefecto="#0061c2";
-//$idMenu="9";
+$colorElegido="#4e4e4e";
+$colorDefecto="#0061c2";
+$idMenu="9";
 
-//$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
-//$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
 
 $tipoDeAlerta = $con->getMensajeAlerta();
 foreach ($tipoDeAlerta as $tipoAlerta) {
@@ -47,15 +47,24 @@ if (!isset($_GET['estado'])) {
 $urlViews = URL_VIEWS;
 $userLogueado = $nombres;
 $imageUser = $foto;
+$userId =  $id_usuario;
 
 $allPedido =$con->getAllPedido();
 $allProveedor =$con->getAllProveedor();
 $tipoProductos = $con->getAllTipoProducto();
 
-$menuMain = $con->getMenuMain();
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+    require("../Views/PedidoViews.php");
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+    require('../Views/WellcomeVentas.php');
+
+}
 
 
-require("../Views/PedidoViews.php");
+
 
 
 ?>

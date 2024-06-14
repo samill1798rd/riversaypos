@@ -66,6 +66,7 @@ include('Head.php');
                                         <th><i class="icon_folder"></i> DIRECCION</th>
                                         <th><i class="icon_contacts_alt"></i> NUMERO</th>
                                         <th><i class="icon_key"></i> TELEFONO</th>
+                                        <th><i class="icon_key"></i> MENSAJE</th>
                                         <th><i class="icon_cog"></i> ACCIONES</th>
                                     </tr>
                                     </thead>
@@ -79,6 +80,7 @@ include('Head.php');
                                             <td> <?PHP echo $datosUsuarioFactura['direccion']; ?></td>
                                             <td> <?PHP echo $datosUsuarioFactura['nro']; ?></td>
                                             <td> <?PHP echo $datosUsuarioFactura['telefono']; ?></td>
+                                            <td> <?PHP echo $datosUsuarioFactura['mensaje']; ?></td>
                                             <td>
                                                 <a href="#a<?php echo $datosUsuarioFactura[0]; ?>" role="button"
                                                    class="btn btn-success" data-toggle="modal">
@@ -151,6 +153,15 @@ include('Head.php');
                                                                     <input class="form-control input-lg m-bot15"
                                                                            type="text" name="telefono"
                                                                            value="<?php echo $datosUsuarioFactura['telefono']; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                <label for="mensaje"
+                                                                       class="control-label col-lg-2">MENSAJE:</label>
+                                                                <div class="col-lg-10">
+                                                                    <input class="form-control input-lg m-bot15"
+                                                                           type="textarea" name="mensaje"
+                                                                           value="<?php echo $datosUsuarioFactura['mensaje']; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

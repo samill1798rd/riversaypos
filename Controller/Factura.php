@@ -18,10 +18,14 @@ foreach ($onlyUserSession as $user) {
     $usuario = $user['login'];
     $password = $user['password'];
     $tipoUsuserio = $user['tipo'];
+    $id_usuario = $user['id_usu'];
+
 }
+
+$userId =  $id_usuario;
 $urlViews = URL_VIEWS;
 
-$getTotalPreventa = $con->getTotalPreventa();
+$getTotalPreventa = $con->getTotalPreventa($userId);
 
 foreach ($getTotalPreventa as $preVentaTotal){
     $preventa = $preVentaTotal['total'];

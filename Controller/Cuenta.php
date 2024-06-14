@@ -27,8 +27,8 @@ $colorElegido="#4e4e4e";
 $colorDefecto="#0061c2";
 $idMenu="8";
 
-// $updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
-// $updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
+$updateMenuColorElegido=$con->updateOpcionElegida($colorElegido,$idMenu);
+$updateMenuColorDefecto=$con->updateOpcionDefecto($colorDefecto,$idMenu);
 
 
 $tipoDeAlerta = $con->getMensajeAlerta();
@@ -52,10 +52,21 @@ $imageUser = $foto;
 $allGastos =$con->getAllGastos();
 $tipoProductos = $con->getAllTipoProducto();
 
-$menuMain = $con->getMenuMain();
+// $menuMain = $con->getMenuMain();
 
 
-require("../Views/CuentaViews.php");
+if($tipo == 'ADMINISTRADOR'){
+    $menuMain = $con->getMenuMain();
+    require("../Views/CuentaViews.php");
+}
+else{
+    $menuMain = $con->getMenuMainToVentas();
+    require('../Views/WellcomeVentas.php');
+
+}
+
+
+
 
 
 ?>

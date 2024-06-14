@@ -52,7 +52,7 @@ if (isset($_POST['nuevo_Producto'])) {
     }
 
     else{
-        $destino = "fotoUsuario/user.png";
+        $destino = "fotoproducto/NoPicture.jpg";
     }
 
     $mensaje = "Se registro un nuevo producto  correctamente !!!";
